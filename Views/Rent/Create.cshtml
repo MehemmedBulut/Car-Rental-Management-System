@@ -1,0 +1,59 @@
+﻿@model Rent
+
+<div class="card-body">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-check-label">İstifadəçinin adı və soyadı:</label>
+            <select class="form-select" name="nsId" id="namesId" >
+                @foreach (Driver driver in ViewBag.Driver)
+                {
+                    <option value="@driver.Id">@($"{driver.Name} {driver.Surname}")</option>
+                }
+                <span asp-validation-for="Driver"></span>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Istifadəçinin Telefon nömrəsi nömrəsi:</label>
+            <select class="form-select" name="phoneId" id="PhoneNumId">
+                @foreach (Driver drivers in ViewBag.Driver)
+                {
+                    <option value="@drivers.Id">@drivers.PhoneNumber</option>
+                }
+                <span asp-validation-for="Driver"></span>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Avtomobilin nömrəsi:</label>
+            <select class="form-select" name="NumId" id="CnumId" >
+                @foreach (Car cars in ViewBag.Car)
+                {
+                            <option value="@cars.Id">@cars.CarNumber</option>
+                }
+                <span asp-validation-for="Car"></span>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Kirayə götürmə tarixi</label>
+            <input asp-for="RentDate" class="form-control">
+            <span asp-validation-for="RentDate" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Bitiş tarixi</label>
+            <input asp-for="ReturnDate" id="Rİd"  class="form-control">
+            <span asp-validation-for="ReturnDate" style="color:red"></span>
+        </div>
+        <div style="display:flex;gap:20px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-light">Geri</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+

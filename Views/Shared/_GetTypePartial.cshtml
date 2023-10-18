@@ -1,0 +1,6 @@
+﻿@model List<Ctype>
+
+    @foreach (Ctype type in Model)
+    {
+        <option value="@type.Id">@type.Name</option>
+    }

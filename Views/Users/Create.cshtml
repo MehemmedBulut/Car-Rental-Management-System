@@ -1,0 +1,54 @@
+﻿@model RegisterVM
+<div class="card-body">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <form method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Surname</label>
+            <input asp-for="Surname" class="form-control">
+            <span asp-validation-for="Surname" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input asp-for="Username" class="form-control">
+            <span asp-validation-for="Username" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Password</label>
+            <input asp-for="Password" class="form-control">
+            <span asp-validation-for="Password" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">CheckPassword</label>
+            <input asp-for="CheckPassword" class="form-control">
+            <span asp-validation-for="CheckPassword" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="disabledSelect" class="form-label">Rolu seç</label>
+            <select id="disabledSelect" name="role" class="form-select">
+                @foreach (string role in ViewBag.Roles)
+                {
+                    <option value="@role">@role</option>
+                }
+            </select>
+        </div>
+        <div style="display:flex;gap:20px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-light">Geri</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}

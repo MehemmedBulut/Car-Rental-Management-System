@@ -1,0 +1,90 @@
+﻿@model List<UserVM>
+<div class="card-body p-4">
+    <div class="d-flex justify-content-between">
+        <h5 class="card-title fw-semibold mb-4">Hesabların Listesi</h5>
+        <a asp-action="Create" class="btn btn-primary m-1">Yarat</a>
+    </div>
+    <div class="table-responsive mt-3">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Ad ve Soyad</th>
+                    <th scope="col">Kullanıcı Adı</th>
+                    <th scope="col">E-posta</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Durum</th>
+                    <th scope="col" style="text-align: end">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserVM item in Model)
+                {
+                    <tr>
+                        <td>@item.Name @item.Surname</td>
+                        <td>@item.Username</td>
+                        <td>@item.Email</td>
+                        <td>@item.Role</td>
+                        <td>
+                            @if (!item.IsDeactive)
+                            {
+                                <span class="badge text-bg-success">Aktiv</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-danger">Aktiv deyil</span>
+                            }
+                        </td>
+                        <td class="d-flex justify-content-end">
+                            <a class="btn btn-warning btn-sm m-1" asp-route-id="@item.Id" asp-action="ResetPassword">Şifre Değiştir</a>
+                            <a class="btn btn-info btn-sm m-1" asp-route-id="@item.Id" asp-action="Update">Güncelle</a>
+                            @if (User.Identity.Name != item.Username)
+                            {
+                                @if (!item.IsDeactive)
+                                {
+                                    <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-danger btn-sm m-1">Deaktive Et</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="Activity" asp-route-id="@item.Id" class="btn btn-success btn-sm m-1">Aktive Et</a>
+                                }
+                            }
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    #myTable_length {
+        display: none;
+    }
+
+    #myTable_info {
+        display: none;
+    }
+
+    #myTable_paginate {
+        display: none;
+    }
+</style>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+}

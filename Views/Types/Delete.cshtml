@@ -1,0 +1,14 @@
+﻿@model Ctype
+<div class="card-body">
+    <form method="post">
+        <h5>Silmək istədiyinizə əminsinizmi?</h5>
+
+        <button type="submit" class="btn btn-danger">Sil</button>
+        <a asp-action="Index" class="btn btn-light">Geri</a>
+
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

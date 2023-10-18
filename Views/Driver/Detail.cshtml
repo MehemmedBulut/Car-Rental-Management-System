@@ -1,0 +1,53 @@
+﻿@model Driver
+
+<style>
+    /* Özelleştirilmiş CSS stilleri */
+    .driver-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .driver-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+        .driver-details > div {
+            flex-basis: calc(33.33% - 10px);
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .driver-details h5 {
+            margin-bottom: 10px;
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="driver-card">
+        <h5>Sürücü Bilgileri</h5>
+        <div class="driver-details">
+            <div>
+                <h5>Ad ve Soyad:</h5>
+                <p>@Model.Name @Model.Surname</p>
+            </div>
+            <div>
+                <h5>Yaş:</h5>
+                <p>@Model.Age</p>
+            </div>
+            <div>
+                <h5>Telefon Numarası:</h5>
+                <p>@Model.PhoneNumber</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Geri</a>
+</div>

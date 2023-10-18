@@ -1,0 +1,100 @@
+﻿@model Car
+<div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label  class="form-label">Görüntülər</label>
+            <input asp-for="Photos" class="form-control">
+            <span asp-validation-for="Photos" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Marka:</label>
+            <select class="form-select" name="brandId" id="mainBrand" >
+                @foreach (Brand brand in ViewBag.Brand)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+                <span asp-validation-for="Brand"></span>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Model:</label>
+            <select class="form-select" name="typesId" id="mainType" a>
+                @foreach (Ctype type in ViewBag.Type)
+                {
+                    <option value="@type.Id">@type.Name</option>
+                }
+                <span asp-validation-for="Brand.Types"></span>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Yanacaq növü:</label>
+            <select class="form-select" name="fId" id="fuelİd" a>
+                @foreach (Fuel fuel in ViewBag.Fuel)
+                {
+                    <option value="@fuel.Id">@fuel.Name</option>
+                }
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Sürət qutusu:</label>
+            <select class="form-select" name="tId" id="transmissionİd" a>
+                @foreach (Transmission transmission in ViewBag.Transmission)
+                {
+                    <option value="@transmission.Id">@transmission.Name</option>
+                }
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Avtomobilin Nömrəsi</label>
+            <input asp-for="CarNumber" class="form-control">
+            <span asp-validation-for="CarNumber" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Buraxılış ili</label>
+            <input asp-for="PassYear" class="form-control">
+            <span asp-validation-for="PassYear" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Rəng</label>
+            <input asp-for="Color" class="form-control">
+            <span asp-validation-for="Color" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Günlük qiymət</label>
+            <input asp-for="DailyPrice" class="form-control">
+            <span asp-validation-for="DailyPrice" style="color:red"></span>
+        </div>
+        <div style="display:flex;gap:20px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-light">Geri</a>
+        </div>
+    </form>
+</div>
+
+ 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).on("change", "#mainBrand", function () {
+            $.ajax({
+                url: "/Car/GetType/",
+                type: "get",
+                data: {
+                    "mainId": $("#mainBrand").val(),
+                    "childId": $("#typesId").val()
+                },
+                success: function (res) {
+                    $("#mainType").empty()
+                    $("#mainType").append(res)
+
+                }
+            });
+        });
+    </script>
+}
+
+
+    

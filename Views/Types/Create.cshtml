@@ -1,0 +1,29 @@
+﻿@model Ctype
+<div class="card-body">
+    <form method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Marka:</label>
+            <select class="form-select" name="brandId" >
+                @foreach (Brand brand in ViewBag.Brand)
+                {
+                        <option value="@brand.Id">@brand.Name</option>
+                }
+
+            </select>
+        </div>
+        <div style="display:flex;gap:20px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-light">Geri</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}

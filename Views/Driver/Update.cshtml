@@ -1,0 +1,41 @@
+﻿@using RentalFinal.Helpers;
+@model Driver
+<div class="card-body">
+    <form method="post">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ad</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Soyad</label>
+            <input asp-for="Surname" class="form-control">
+            <span asp-validation-for="Surname" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Yaş</label>
+            <input asp-for="Age" class="form-control">
+            <span asp-validation-for="Age" style="color:red"></span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Cinsiyyət</label>
+            <select class="form-select" asp-for="Gender" asp-items="Html.GetEnumSelectList<Helper.Gender>()">
+                <span asp-validation-for="Gender"></span>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Telefon nömrəsi</label>
+            <input asp-for="PhoneNumber" class="form-control">
+            <span asp-validation-for="PhoneNumber" style="color:red"></span>
+        </div>
+        <div style="display:flex;gap:20px">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-light">Geri</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}

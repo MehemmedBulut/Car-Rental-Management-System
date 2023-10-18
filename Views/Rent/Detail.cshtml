@@ -1,0 +1,121 @@
+﻿@model Rent
+
+<style>
+    /* Özelleştirilmiş CSS stilleri */
+    .rent-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .rent-card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+        text-align: left;
+    }
+
+        .rent-card h4 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+    .rent-details {
+        margin-top: 20px;
+    }
+
+        .rent-details dt {
+            font-weight: bold;
+        }
+
+        .rent-details dd {
+            margin-left: 0;
+            margin-bottom: 10px;
+        }
+
+    .btn-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .btn-back {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container mt-4 rent-container">
+    <div class="rent-card">
+        <h4>Sürücü detalları</h4>
+        <div class="rent-details">
+            <dl>
+                <dt>Adı:</dt>
+                <dd>@Model.Driver.Name</dd>
+
+                <dt>Soyadı:</dt>
+                <dd>@Model.Driver.Surname</dd>
+
+                <dt>Telefon nömrəsi:</dt>
+                <dd>@Model.Driver.PhoneNumber</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="rent-card">
+        <h4>Avtomobil detalları</h4>
+        <div class="rent-details">
+            <dl>
+                <dt>Marka:</dt>
+                <dd>@Model.Car.Brand.Name</dd>
+
+                <dt>Model:</dt>
+                <dd>@Model.Car.Type.Name</dd>
+
+                <dt>Avomobil nömrəsi:</dt>
+                <dd>@Model.Car.CarNumber</dd>
+                
+            </dl>
+        </div>
+    </div>
+
+    <div class="rent-card">
+        <h4>Kirayə detalları</h4>
+        <div class="rent-details">
+            <dl>
+                <dt>Götürme Tarixi:</dt>
+                <dd>@Model.RentDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                <dt>Təhvil tarixi:</dt>
+                <dd>@Model.ReturnDate.ToString("dd/MM/yyyy HH:mm")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="rent-card">
+        <h4>Ödəniş detalları</h4>
+        <div class="rent-details">
+            <dl>
+                <dt>Günlük qiymət:</dt>
+                <dd>@Model.Car.DailyPrice$</dd>
+
+                <dt>Toplam qiymət:</dt>
+                <dd>@Model.TotalPrice$</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <a asp-action="Index" class="btn-back">Geri</a>
+    </div>
+</div>
