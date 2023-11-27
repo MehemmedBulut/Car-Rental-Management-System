@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RentalFinal.DAL;
+using RentalFinal.ViewModels;
 using System;
 using System.Data;
 using System.Linq;
@@ -18,16 +19,35 @@ namespace RentalFinal.Controllers
         }
         public IActionResult Index()
         {
-            DateTime güncelTarih = DateTime.Now;
-            int güncelAy = güncelTarih.Month;
-            int güncelYıl = güncelTarih.Year;
+            DateTime cariTarix = DateTime.Now;
+            int cariAy = cariTarix.Month;
+            int carilIl = cariTarix.Year;
 
-            // Geçerli ay ve yıl için tüm Kiralama nesnelerinin TotalPrice toplamını hesaplayın
-            float aylıkToplamKiraBedeli = _db.Rents
-                .Where(k => k.RentDate.Month == güncelAy && k.RentDate.Year == güncelYıl)
+            
+            float aylıkToplamKiraye = _db.Rents
+                .Where(k => k.RentDate.Month == cariAy && k.RentDate.Year == carilIl)
                 .Sum(k => k.TotalPrice);
 
-            ViewBag.AylıkToplamKiraBedeli = aylıkToplamKiraBedeli; // Toplamı ViewBag içinde saklayın
+            ViewBag.AylıkToplamKiraBedeli = aylıkToplamKiraye;
+
+            DateTime bugun = DateTime.Now;
+            DateTime otuzGunEvvel = bugun.AddDays(-30);
+
+            float lastThirtyDaysTotalRent = _db.Rents
+                .Where(k => k.RentDate >= otuzGunEvvel && k.RentDate <= bugun)
+                .Sum(k => k.TotalPrice);
+
+            ViewBag.OtuzGunEvvelkiGelir = lastThirtyDaysTotalRent;
+
+            DateTime today = DateTime.Today;
+            DateTime yesterday = today.AddDays(-1);
+
+            float dailyTotalRent = _db.Rents
+                .Where(k => k.RentDate.Date == today)
+                .Sum(k => k.TotalPrice);
+
+            ViewBag.DailyTotalRent = dailyTotalRent;
+
 
             return View();
         }

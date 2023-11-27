@@ -33,7 +33,7 @@ namespace RentalFinal.Controllers
                 {
                     Id = user.Id,
                     Name = user.Name,
-                    Surname= user.Surname,
+                    Surname = user.Surname,
                     Email = user.Email,
                     Username = user.UserName,
                     IsDeactive = user.IsDeactive,
@@ -49,6 +49,7 @@ namespace RentalFinal.Controllers
             {
                 Helper.Admin,
                 Helper.ContentManager,
+                Helper.Moderator
             };
 
             return View();
@@ -61,6 +62,7 @@ namespace RentalFinal.Controllers
             {
                 Helper.Admin,
                 Helper.ContentManager,
+                Helper.Moderator
             };
             AppUser appUser = new AppUser
             {
@@ -84,12 +86,12 @@ namespace RentalFinal.Controllers
 
         public async Task<IActionResult> Update(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return NotFound();
             }
             AppUser user = await _userManager.FindByIdAsync(id);
-            if(user==null)
+            if (user == null)
             {
                 return BadRequest();
             }
@@ -116,6 +118,7 @@ namespace RentalFinal.Controllers
             {
                 Helper.Admin,
                 Helper.ContentManager,
+                Helper.Moderator
             };
             if (id == null)
             {

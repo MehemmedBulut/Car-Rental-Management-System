@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RentalFinal.Controllers
 {
-    [Authorize(Roles = "Admin,ContentManager")]
+    [Authorize(Roles = "Admin,ContentManager,Moderator")]
     public class HomeController : Controller
     {
         private readonly AppDbContext _db;

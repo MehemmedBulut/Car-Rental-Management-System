@@ -170,18 +170,18 @@ namespace RentalFinal.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(string id, ResetPasswordVM resetPasswordVM)
+        public async Task<IActionResult> ResetPassword(string userId, string token, ResetPasswordVM resetPasswordVM)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return NotFound();
             }
-            AppUser user = await _userManager.FindByIdAsync(id);
+            AppUser user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return BadRequest();
             }
-            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            
             IdentityResult ıdentityResult = await _userManager.ResetPasswordAsync(user, token, resetPasswordVM.Password);
             if (!ıdentityResult.Succeeded)
             {
@@ -232,14 +232,19 @@ namespace RentalFinal.Controllers
         #region RolYaratma
         //public async Task CreateRoles()
         //{
-        //    if (!await _roleManager.RoleExistsAsync(Helper.Admin))
+        //    if (!await _roleManager.RoleExistsAsync(Helper.Moderator))
         //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = Helper.Admin });
+        //        await _roleManager.CreateAsync(new IdentityRole { Name = Helper.Moderator });
         //    }
-        //    if (!await _roleManager.RoleExistsAsync(Helper.ContentManager))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = Helper.ContentManager });
-        //    }
+        //    //if (!await _roleManager.RoleExistsAsync(Helper.Admin))
+        //    //{
+        //    //    await _roleManager.CreateAsync(new IdentityRole { Name = Helper.Admin });
+        //    //}
+        //    //if (!await _roleManager.RoleExistsAsync(Helper.ContentManager))
+        //    //{
+        //    //    await _roleManager.CreateAsync(new IdentityRole { Name = Helper.ContentManager });
+        //    //}
+
         //}
         #endregion
 

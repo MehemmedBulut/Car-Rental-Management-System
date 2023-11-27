@@ -30,6 +30,7 @@ namespace RentalFinal.Helpers
         #region Rollar
         public const string Admin = "Admin";
         public const string ContentManager = "ContentManager";
+        public const string Moderator = "Moderator";
         #endregion
 
         #region Cinsiyyət
